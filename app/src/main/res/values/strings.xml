@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">SimpleAndroidApp</string>
+    <string name="enter_email_please">Enter Email</string>
+    <string name="enter_password">Enter Password</string>
+    <string name="check_to_stay_logged_in">Remember Me</string>
+    <string name="login">Login</string>
+    <string name="timer">Timer</string>
+    <string name="field_not_empty">Field should not be empty</string>
+</resources>
