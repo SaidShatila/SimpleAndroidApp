@@ -6,4 +6,13 @@
     <string name="login">Login</string>
     <string name="timer">Timer</string>
     <string name="field_not_empty">Field should not be empty</string>
+    <string name="_00_00_00">00:00:00</string>
+    <string name="this_is_the_list">This is the List</string>
+    <string name="_1">1</string>
+    <string name="charles">Charles</string>
+    <string name="false_text">false</string>
+    <string name="are_you_sure_you_want_to_logout">Are you sure you want to logout</string>
+    <string name="logout_text">Logout</string>
+    <string name="cancel">Cancel</string>
+    <string name="listview">ListView</string>
 </resources>
