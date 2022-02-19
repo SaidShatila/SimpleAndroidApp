@@ -10,11 +10,11 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import com.example.simpleandroidapp.R
+import com.example.simpleandroidapp.data.TimerUtils
 import com.example.simpleandroidapp.databinding.FragmentLoginBinding
 import com.example.simpleandroidapp.ui.activities.HomeActivity
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.runBlocking
 
 @AndroidEntryPoint
 class LoginFragment : Fragment() {
@@ -36,25 +36,13 @@ class LoginFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setLayoutListeners()
-        checkState()
     }
 
-    private fun checkState() {
-        runBlocking {
-            viewModel.getState()
-        }
-
-        state = viewModel.rememberMeStateLiveData.value ?: false
-        viewModel.rememberMeStateLiveData.observe(viewLifecycleOwner) {
-            if (state)
-                binding.cbStayLoggedIn.isChecked = true
-        }
-    }
 
     private fun setLayoutListeners() {
-        binding.apply {
+        with(binding) {
             etEmail.addTextChangedListener {
-                    btLogin.isEnabled = it?.trim()?.isNotEmpty() == true
+                btLogin.isEnabled = it?.trim()?.isNotEmpty() == true
             }
             btLogin.setOnClickListener {
                 if (areInputValid()) {
@@ -62,16 +50,16 @@ class LoginFragment : Fragment() {
                         viewModel.saveState(cbStayLoggedIn.isChecked)
                     }
                     startActivity(Intent(requireActivity(), HomeActivity::class.java))
-                    requireActivity().finish()
+                    TimerUtils.resetTimer()
+                    //  requireActivity().finish()
                 }
             }
-
         }
     }
 
     private fun areInputValid(): Boolean {
         var isValid = true
-        binding.apply {
+        with(binding) {
             if (etEmail.text.isEmpty()) {
                 isValid = false
                 etEmail.error = getString(R.string.field_not_empty)
