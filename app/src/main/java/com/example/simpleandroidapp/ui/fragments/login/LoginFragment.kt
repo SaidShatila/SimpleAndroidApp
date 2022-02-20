@@ -20,7 +20,6 @@ import kotlinx.coroutines.launch
 class LoginFragment : Fragment() {
 
     private lateinit var binding: FragmentLoginBinding
-    private var state = false
 
     private val viewModel: LoginViewModel by viewModels()
 

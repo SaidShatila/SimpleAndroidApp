@@ -6,8 +6,10 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.DialogFragment
 import com.example.simpleandroidapp.databinding.DialogLogoutBinding
+import dagger.hilt.android.AndroidEntryPoint
 
-class LogoutDialog(val onCancel: () -> Unit, val onLogout: () -> Unit) :
+@AndroidEntryPoint
+class LogoutDialog :
     DialogFragment() {
 
     private lateinit var binding: DialogLogoutBinding
@@ -38,10 +40,8 @@ class LogoutDialog(val onCancel: () -> Unit, val onLogout: () -> Unit) :
         binding.apply {
             btCancel.setOnClickListener {
                 dismiss()
-                onCancel()
             }
             btLogout.setOnClickListener {
-                onLogout()
                 dismiss()
             }
         }
