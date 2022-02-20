@@ -10,10 +10,12 @@ import com.example.simpleandroidapp.R
 import com.example.simpleandroidapp.data.remote.response.Todos
 import com.example.simpleandroidapp.databinding.ItemTodosBinding
 
-class TodosRecyclerViewAdapter : RecyclerView.Adapter<TodosRecyclerViewAdapter.TodosViewHolder>() {
+class TodosRecyclerViewAdapter(val isClicked: (todos: Todos) -> Unit) :
+    RecyclerView.Adapter<TodosRecyclerViewAdapter.TodosViewHolder>() {
 
     private var todosList: List<Todos> = emptyList()
-    private lateinit var context : Context
+    private lateinit var context: Context
+
     @SuppressLint("NotifyDataSetChanged")
     fun setUpData(todosList: List<Todos>) {
         this.todosList = todosList
@@ -23,18 +25,22 @@ class TodosRecyclerViewAdapter : RecyclerView.Adapter<TodosRecyclerViewAdapter.T
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TodosViewHolder {
         context = parent.context
         val inflater = LayoutInflater.from(context)
-        val binding = ItemTodosBinding.inflate(inflater,parent,false)
-        return TodosViewHolder(binding,context)
+        val binding = ItemTodosBinding.inflate(inflater, parent, false)
+        return TodosViewHolder(binding, context)
     }
 
     override fun onBindViewHolder(holder: TodosViewHolder, position: Int) {
         holder.bind(todosList[position])
+        holder.itemView.setOnClickListener {
+            isClicked(todosList[position])
+        }
     }
 
 
     override fun getItemCount(): Int = todosList.size
 
-    class TodosViewHolder(private val binding: ItemTodosBinding, val context: Context) : RecyclerView.ViewHolder(binding.root) {
+    class TodosViewHolder(private val binding: ItemTodosBinding, val context: Context) :
+        RecyclerView.ViewHolder(binding.root) {
         fun bind(todos: Todos) {
             with(binding) {
                 tvId.text = todos.id.toString()
@@ -43,7 +49,7 @@ class TodosRecyclerViewAdapter : RecyclerView.Adapter<TodosRecyclerViewAdapter.T
                 tvCompleted.text = todos.completed.toString()
 
                 if (todos.completed) {
-                            itemView.setBackgroundColor(ContextCompat.getColor(context,R.color.purple_200))
+                    itemView.setBackgroundColor(ContextCompat.getColor(context, R.color.purple_200))
                 }
             }
         }

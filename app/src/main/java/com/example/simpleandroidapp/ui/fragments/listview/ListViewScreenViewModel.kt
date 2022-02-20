@@ -20,7 +20,7 @@ class ListViewScreenViewModel @Inject constructor(
 ) :
     AndroidViewModel(application) {
     val getTodosList: MutableLiveData<NetworkResult<List<Todos>>?> = MutableLiveData()
-    val errorMessage = MutableLiveData<String>()
+
 
     fun fetchTodos() {
         viewModelScope.launch(Dispatchers.IO) {
