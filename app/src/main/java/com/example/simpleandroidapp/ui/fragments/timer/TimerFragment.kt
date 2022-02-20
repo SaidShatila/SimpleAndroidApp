@@ -6,7 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
-import com.example.simpleandroidapp.data.TimerUtils
+import com.example.simpleandroidapp.utils.TimerUtils
 import com.example.simpleandroidapp.databinding.FragmentTimerBinding
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect

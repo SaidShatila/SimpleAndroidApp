@@ -10,7 +10,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import com.example.simpleandroidapp.R
-import com.example.simpleandroidapp.data.TimerUtils
+import com.example.simpleandroidapp.utils.TimerUtils
 import com.example.simpleandroidapp.databinding.FragmentLoginBinding
 import com.example.simpleandroidapp.ui.activities.HomeActivity
 import dagger.hilt.android.AndroidEntryPoint

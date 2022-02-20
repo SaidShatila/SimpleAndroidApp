@@ -1,4 +1,4 @@
-package com.example.simpleandroidapp.data
+package com.example.simpleandroidapp.utils
 
 import kotlinx.coroutines.channels.awaitClose
 import kotlinx.coroutines.flow.callbackFlow
@@ -33,8 +33,8 @@ object TimerUtils {
         val formattedString = "%02d:%02d:%02d"
         return formattedString.format(
             duration.inWholeHours,
-            duration.inWholeMinutes - (60 * duration.inWholeHours),
-            duration.inWholeSeconds - (60 * duration.inWholeMinutes)
+            duration.inWholeMinutes /*- (60 * duration.inWholeHours),*/,
+            duration.inWholeSeconds /*- (60 * duration.inWholeMinutes) -2*/
         )
     }
 }

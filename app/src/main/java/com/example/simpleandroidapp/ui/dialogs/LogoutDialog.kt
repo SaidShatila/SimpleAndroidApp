@@ -5,7 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.DialogFragment
-import com.example.simpleandroidapp.data.TimerUtils
+import com.example.simpleandroidapp.utils.TimerUtils
 import com.example.simpleandroidapp.databinding.DialogLogoutBinding
 import dagger.hilt.android.AndroidEntryPoint
 
