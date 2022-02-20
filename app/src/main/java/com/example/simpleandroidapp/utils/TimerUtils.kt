@@ -33,8 +33,8 @@ object TimerUtils {
         val formattedString = "%02d:%02d:%02d"
         return formattedString.format(
             duration.inWholeHours,
-            duration.inWholeMinutes /*- (60 * duration.inWholeHours),*/,
-            duration.inWholeSeconds /*- (60 * duration.inWholeMinutes) -2*/
+            duration.inWholeMinutes - (60 * duration.inWholeHours),
+            duration.inWholeSeconds - (60 * duration.inWholeMinutes) -2
         )
     }
 }
