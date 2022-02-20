@@ -1,6 +1,7 @@
 package com.example.simpleandroidapp.ui.activities
 
 import android.os.Bundle
+import androidx.activity.addCallback
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GravityCompat
 import androidx.navigation.NavController
@@ -9,6 +10,7 @@ import androidx.navigation.ui.NavigationUI
 import androidx.navigation.ui.setupWithNavController
 import com.example.simpleandroidapp.R
 import com.example.simpleandroidapp.databinding.ActivityHomeBinding
+import com.example.simpleandroidapp.ui.dialogs.LogoutDialog
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -22,6 +24,11 @@ class HomeActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
         setupDrawer()
+
+
+        onBackPressedDispatcher.addCallback {
+            LogoutDialog().show(supportFragmentManager, "")
+        }
     }
 
 
