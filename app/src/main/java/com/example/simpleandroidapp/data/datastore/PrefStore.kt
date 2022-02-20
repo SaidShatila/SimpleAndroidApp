@@ -1,6 +1,5 @@
 package com.example.simpleandroidapp.data.datastore
 
-import android.text.format.DateFormat
 import kotlinx.coroutines.flow.Flow
 
 interface PrefStore {

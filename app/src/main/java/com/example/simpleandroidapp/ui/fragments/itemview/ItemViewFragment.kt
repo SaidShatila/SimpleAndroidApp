@@ -8,9 +8,7 @@ import androidx.fragment.app.Fragment
 import com.example.simpleandroidapp.data.remote.response.Todos
 import com.example.simpleandroidapp.databinding.FragmentItemViewBinding
 import com.example.simpleandroidapp.utils.Constants.KeyUtils.Companion.KEY_ITEM_TODOS
-import com.google.gson.Gson
-import com.google.gson.JsonElement
-import com.google.gson.JsonObject
+
 
 class ItemViewFragment : Fragment() {
     private lateinit var binding: FragmentItemViewBinding
