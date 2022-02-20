@@ -46,7 +46,7 @@ class SplashFragment : Fragment() {
             when (state) {
                 true -> {
                     startActivity(Intent(requireActivity(), HomeActivity::class.java))
-                 //   requireActivity().finish()
+                    requireActivity().finish()
                 }
                 false -> {
                     if (findNavController().currentDestination?.id == R.id.splashFragment)

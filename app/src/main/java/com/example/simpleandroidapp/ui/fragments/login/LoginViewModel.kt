@@ -17,4 +17,9 @@ class LoginViewModel @Inject constructor(private val prefStoreImplementation: Pr
             prefStoreImplementation.saveRememberMeState(state)
         }
     }
+    fun saveLoginDate(date : String){
+        viewModelScope.launch(Dispatchers.IO) {
+            prefStoreImplementation.setUserDateLogin(date)
+        }
+    }
 }

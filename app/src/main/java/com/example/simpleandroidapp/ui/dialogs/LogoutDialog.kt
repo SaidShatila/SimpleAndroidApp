@@ -1,13 +1,19 @@
 package com.example.simpleandroidapp.ui.dialogs
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.DialogFragment
-import com.example.simpleandroidapp.utils.TimerUtils
+import androidx.lifecycle.lifecycleScope
+import com.example.simpleandroidapp.data.datastore.PrefStoreImplementation
 import com.example.simpleandroidapp.databinding.DialogLogoutBinding
+import com.example.simpleandroidapp.ui.activities.MainActivity
+import com.example.simpleandroidapp.utils.TimerUtils
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.launch
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class LogoutDialog :
@@ -15,6 +21,8 @@ class LogoutDialog :
 
     private lateinit var binding: DialogLogoutBinding
 
+    @Inject
+    lateinit var prefStoreImplementation: PrefStoreImplementation
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -41,10 +49,16 @@ class LogoutDialog :
         binding.apply {
             btCancel.setOnClickListener {
                 dismiss()
+
             }
             btLogout.setOnClickListener {
-                dismiss()
                 TimerUtils.resetTimer()
+                lifecycleScope.launch {
+                    prefStoreImplementation.saveRememberMeState(false)
+                }
+                dismiss()
+                startActivity(Intent(requireActivity(), MainActivity::class.java))
+                requireActivity().finish()
             }
         }
 

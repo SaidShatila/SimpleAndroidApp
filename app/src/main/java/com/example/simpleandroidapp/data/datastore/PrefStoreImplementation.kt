@@ -2,10 +2,7 @@ package com.example.simpleandroidapp.data.datastore
 
 import android.content.Context
 import androidx.datastore.core.DataStore
-import androidx.datastore.preferences.core.Preferences
-import androidx.datastore.preferences.core.booleanPreferencesKey
-import androidx.datastore.preferences.core.edit
-import androidx.datastore.preferences.core.emptyPreferences
+import androidx.datastore.preferences.core.*
 import androidx.datastore.preferences.preferencesDataStore
 import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.flow.Flow
@@ -39,7 +36,23 @@ class PrefStoreImplementation @Inject constructor(
         }
     }
 
+    override fun getUserLoginDate(): Flow<String> = dataStore.data.catch { exception ->
+        if (exception is IOException) {
+            emit(emptyPreferences())
+        } else {
+            throw exception
+        }
+    }.map { it[PreferenceKeys.USER_TIME_LOGGED_IN] ?: "" }
+
+
+    override suspend fun setUserDateLogin(dateFormat: String) {
+        dataStore.edit {
+            it[PreferenceKeys.USER_TIME_LOGGED_IN] = dateFormat
+        }
+    }
+
     private object PreferenceKeys {
         val REMEMBER_ME_STATE = booleanPreferencesKey("remember_me")
+        val USER_TIME_LOGGED_IN = stringPreferencesKey("user_time")
     }
 }

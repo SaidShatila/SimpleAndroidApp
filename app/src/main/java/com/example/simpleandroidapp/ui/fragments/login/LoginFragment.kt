@@ -1,20 +1,25 @@
 package com.example.simpleandroidapp.ui.fragments.login
 
 import android.content.Intent
+import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.annotation.RequiresApi
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import com.example.simpleandroidapp.R
-import com.example.simpleandroidapp.utils.TimerUtils
 import com.example.simpleandroidapp.databinding.FragmentLoginBinding
 import com.example.simpleandroidapp.ui.activities.HomeActivity
+import com.example.simpleandroidapp.utils.TimerUtils
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
+import java.time.LocalDateTime
+import java.time.format.DateTimeFormatter
+import java.util.*
 
 @AndroidEntryPoint
 class LoginFragment : Fragment() {
@@ -32,12 +37,14 @@ class LoginFragment : Fragment() {
         return binding.root
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setLayoutListeners()
     }
 
 
+    @RequiresApi(Build.VERSION_CODES.O)
     private fun setLayoutListeners() {
         with(binding) {
             etEmail.addTextChangedListener {
@@ -47,10 +54,14 @@ class LoginFragment : Fragment() {
                 if (areInputValid()) {
                     lifecycleScope.launch {
                         viewModel.saveState(cbStayLoggedIn.isChecked)
+                        val currentTime = LocalDateTime.now()
+                        val date = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm")
+                        val myDate = currentTime.format(date)
+                        viewModel.saveLoginDate(myDate)
                     }
                     startActivity(Intent(requireActivity(), HomeActivity::class.java))
                     TimerUtils.resetTimer()
-                    //  requireActivity().finish()
+                    requireActivity().finish()
                 }
             }
         }
