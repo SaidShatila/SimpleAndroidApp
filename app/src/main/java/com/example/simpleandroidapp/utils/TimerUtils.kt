@@ -34,7 +34,7 @@ object TimerUtils {
         return formattedString.format(
             duration.inWholeHours,
             duration.inWholeMinutes - (60 * duration.inWholeHours),
-            duration.inWholeSeconds - (60 * duration.inWholeMinutes) -2
+            duration.inWholeSeconds - (60 * duration.inWholeMinutes)
         )
     }
 }
